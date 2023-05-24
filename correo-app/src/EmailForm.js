@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, TextField, TextareaAutosize, Grid, Typography } from '@mui/material';
@@ -11,9 +12,6 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  /**
-   * @method 
-   */
   const handleImageUpload = async () => {
     if (selectedImage) {
       setLoading(true);
@@ -32,6 +30,13 @@ const App = () => {
         });
 
         console.log('Imagen cargada con éxito');
+
+        // Limpiar los campos después de un envío exitoso
+        setSelectedImage(null);
+        setRecipient('');
+        setSubject('');
+        setBody('');
+        setSenderEmail('');
       } catch (error) {
         setErrorMessage(
           error.response ? error.response.data : error.message
@@ -103,6 +108,8 @@ const App = () => {
           disabled={!selectedImage || loading}
           variant="contained"
           color="primary"
+
+
           fullWidth
           size="large"
           style={{ marginTop: '1rem' }}
